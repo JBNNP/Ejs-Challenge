@@ -19,7 +19,12 @@ let posts = [];
 
 
 app.get('/', function(req, res){
-  res.render('home', {homeStartingContent: homeStartingContent});
+  res.render('home', 
+  {
+    homeStartingContent: homeStartingContent,
+    posts: posts, //passing the Array Objects to ejs only requires the variable name of the array in order to be passed
+    
+  });
 });
 
 app.get('/about', function(req, res){
@@ -41,8 +46,6 @@ app.post('/', function(req, res){
   }
 
   posts.push(post);
-
-  console.log(posts);
 
   res.redirect('/');
   
