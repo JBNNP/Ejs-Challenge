@@ -40,7 +40,11 @@ app.get('/compose', function(req, res){
 });
 
 app.get('/posts/:postsId', (req, res) => {
-  console.log(req.params.postsId);
+  posts.forEach((post) => {
+    if(post.title == req.params.postsId){
+      console.log("tite");
+    }
+  });
 });
 
 app.post('/', function(req, res){
