@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+const _ = require('lodash');
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -23,26 +23,31 @@ app.get('/', function(req, res){
   {
     homeStartingContent: homeStartingContent,
     posts: posts, //passing the Array Objects to ejs only requires the variable name of the array in order to be passed
-    
   });
 });
 
 app.get('/about', function(req, res){
-  res.render('about', {aboutContent: aboutContent});
+  res.render('about', { aboutContent: aboutContent });
 });
 
 app.get('/contact', function(req, res){
-  res.render('contact', {contactContent: contactContent});
+  res.render('contact', { contactContent: contactContent });
 })
 
 app.get('/compose', function(req, res){
   res.render('compose');
 });
 
-app.get('/posts/:postsId', (req, res) => {
-  posts.forEach((post) => {
-    if(post.title == req.params.postsId){
-      console.log("tite");
+app.get('/posts/:postsId', function(req, res){
+  const requestedTitle = _.lowerCase(req.params.postsId);
+
+  posts.forEach( function(post){
+    const storedTitle = _.lowerCase(post.title);
+
+    if (storedTitle === requestedTitle) {
+      console.log( "Match Found " + requestedTitle );
+    } else {
+      console.log( "Not Found " + requestedTitle );
     }
   });
 });
@@ -58,14 +63,6 @@ app.post('/', function(req, res){
   res.redirect('/');
   
 });
-
-
-
-
-
-
-
-
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
