@@ -22,7 +22,7 @@ app.get('/', function(req, res){
   res.render('home', 
   {
     homeStartingContent: homeStartingContent,
-    posts: posts, //passing the Array Objects to ejs only requires the variable name of the array in order to be passed
+    posts: posts //passing the Array Objects to ejs only requires the variable name of the array in order to be passed
   });
 });
 
